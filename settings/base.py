@@ -1,15 +1,19 @@
 # Python
+import os
+import sys
 from pathlib import Path
+from decouple import config
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-lquabs-uwae&osr5((utqu$19#uiy^5g#vjwvb=*uv60dqca=w'
+sys.path.append(BASE_DIR)
+sys.path.append(os.path.join(BASE_DIR, 'apps'))
 
-DEBUG = True
+SECRET_KEY = config('SECRET_KEY', str)
+DEBUG = config('DEBUG', bool)
 
 ALLOWED_HOSTS = []
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -49,14 +53,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'settings.wsgi.application'
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME', str),
+        'USER': config('DB_USER', str),
+        'PASSWORD': config('DB_PASSWORD', str),
+        'HOST': config('DB_HOST', str),
+        'PORT': config('DB_PORT', str)
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -73,10 +79,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Almaty'
 
 USE_I18N = True
 
