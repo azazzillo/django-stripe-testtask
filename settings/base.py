@@ -31,7 +31,8 @@ DJANGO_APPS = [
 ]
 
 PROJECT_APPS = [
-    'item.apps.ItemConfig'
+    'item.apps.ItemConfig',
+    'order.apps.OrderConfig'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
