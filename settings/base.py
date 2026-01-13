@@ -1,6 +1,7 @@
 # Python
 import os
 import sys
+import stripe
 from pathlib import Path
 from decouple import config
 
@@ -13,9 +14,14 @@ sys.path.append(os.path.join(BASE_DIR, 'apps'))
 SECRET_KEY = config('SECRET_KEY', str)
 DEBUG = config('DEBUG', bool)
 
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
+stripe.api_key = STRIPE_SECRET_KEY
+
 ALLOWED_HOSTS = []
 
 DJANGO_APPS = [
+    'corsheaders',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,6 +37,7 @@ PROJECT_APPS = [
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
