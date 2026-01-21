@@ -17,7 +17,7 @@ DEBUG = config('DEBUG', bool)
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
 stripe.api_key = STRIPE_SECRET_KEY
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 DJANGO_APPS = [
     'corsheaders',
