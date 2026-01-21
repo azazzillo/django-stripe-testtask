@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  
+  web:
+    build: .
+    command: gunicorn settings.wsgi:application --bind 0.0.0.0:8800
+    volumes:
+      - .:/app
+    ports:
+      - "8800:8800"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+volumes: 
+  db_data:
