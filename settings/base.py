@@ -17,7 +17,11 @@ DEBUG = config('DEBUG', bool)
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
 stripe.api_key = STRIPE_SECRET_KEY
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '825b6ece3fe6.ngrok-free.app']
+ALLOWED_HOSTS = [
+    'localhost', 
+    '127.0.0.1', 
+    'django-stripe-testtask-production.up.railway.app'
+]
 
 DJANGO_APPS = [
     'corsheaders',
